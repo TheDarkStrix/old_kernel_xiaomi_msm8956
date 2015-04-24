@@ -634,6 +634,39 @@ struct mdss_panel_timing {
 	struct mdss_mdp_pp_tear_check te;
 };
 
+struct mdss_panel_timing {
+	struct list_head list;
+	const char *name;
+
+	u32 xres;
+	u32 yres;
+
+	u32 h_back_porch;
+	u32 h_front_porch;
+	u32 h_pulse_width;
+	u32 hsync_skew;
+	u32 v_back_porch;
+	u32 v_front_porch;
+	u32 v_pulse_width;
+
+	u32 border_top;
+	u32 border_bottom;
+	u32 border_left;
+	u32 border_right;
+
+	u32 lm_widths[2];
+
+	u32 clk_rate;
+	char frame_rate;
+
+	u8 dsc_enc_total;
+	struct dsc_desc dsc;
+	struct fbc_panel_info fbc;
+	u32 compression_mode;
+
+	struct mdss_mdp_pp_tear_check te;
+};
+
 struct mdss_panel_data {
 	struct mdss_panel_info panel_info;
 	void (*set_backlight) (struct mdss_panel_data *pdata, u32 bl_level);
