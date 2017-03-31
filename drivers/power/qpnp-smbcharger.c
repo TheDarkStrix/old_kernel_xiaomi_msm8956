@@ -1103,6 +1103,19 @@ static int get_prop_batt_voltage_now(struct smbchg_chip *chip)
 	return uv;
 }
 
+#define DEFAULT_BATT_CHARGE_FULL 4000000
+static int get_prop_batt_charge_full(struct smbchg_chip *chip)
+{
+	int uah, rc;
+
+	rc = get_property_from_fg(chip, POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN, &uah);
+	if (rc) {
+		pr_smb(PR_STATUS, "Couldn't get charge_full rc = %d\n", rc);
+		uah = DEFAULT_BATT_CHARGE_FULL;
+	}
+	return uah;
+}
+
 #define DEFAULT_BATT_VOLTAGE_MAX_DESIGN	4200000
 static int get_prop_batt_voltage_max_design(struct smbchg_chip *chip)
 {
